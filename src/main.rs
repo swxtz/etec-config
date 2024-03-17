@@ -48,9 +48,9 @@ fn main() {
     show_resume(inputs);
 
     // set default branch to main
-    //run_git_command(["config", "--global", "init.defaultBranch", "main"].to_vec());
+    run_git_command(["config", "--global", "init.defaultBranch", "main"].to_vec());
 
-    //download_things();
+    download_links();
 }
 
 fn greeting() {
@@ -63,7 +63,7 @@ fn greeting() {
     println!("------------------------{} \n\n", Fg(Reset));
 }
 
-fn download_things() {
+fn download_links() {
     let urls = [
         "https://github.com/cli/cli/releases/download/v2.45.0/gh_2.45.0_windows_amd64.msi",
         "https://github.com/coreybutler/nvm-windows/releases/download/1.1.12/nvm-setup.exe",
