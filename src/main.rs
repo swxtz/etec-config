@@ -68,6 +68,7 @@ fn download_links() {
         "https://github.com/cli/cli/releases/download/v2.45.0/gh_2.45.0_windows_amd64.msi",
         "https://github.com/coreybutler/nvm-windows/releases/download/1.1.12/nvm-setup.exe",
         "https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.msi",
+        "https://download.jetbrains.com/idea/ideaIC-2023.3.5.exe",
     ];
 
     for link in urls.iter() {
