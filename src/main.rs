@@ -2,20 +2,16 @@ mod browser;
 mod git;
 mod input;
 
+use std::io;
 use crate::browser::open_in_browser;
 use crate::git::run_git_command;
+use colored::Colorize;
 use input::read_input;
-use termion::color;
-use termion::color::{Cyan, Fg, LightCyan, Reset};
 
 fn main() {
     greeting();
 
-    println!(
-        "{}Digite seu nome para o git{}\n",
-        Fg(color::Cyan),
-        Fg(color::Reset)
-    );
+    println!("{}", "Digite seu nome para o git\n".cyan());
 
     let mut inputs: Vec<String> = Vec::new();
 
@@ -29,11 +25,7 @@ fn main() {
         Err(e) => panic!("{}", e),
     };
 
-    println!(
-        "{}Digite seu Email para o git{}\n ",
-        Fg(color::Cyan),
-        Fg(color::Reset)
-    );
+    println!("{}", "Digite seu Email para o git\n".cyan(),);
 
     match read_input("email") {
         Ok(email) => {
@@ -48,19 +40,20 @@ fn main() {
     show_resume(inputs);
 
     // set default branch to main
-    run_git_command(["config", "--global", "init.defaultBranch", "main"].to_vec());
+    run_git_command(["config", "--global", "init.defaultBranch", "main"].to_vec()).expect("Erro ao mudar configuração de branch no git config --global");
+
+    println!("{}", "Pressione ENTER para continuar ... ".yellow());
+
+    let mut confimation = String::new();
+    let _ = io::stdin().read_line(&mut confimation);
 
     download_links();
 }
 
 fn greeting() {
-    println!("{}------------------------\n", Fg(color::Green));
-    println!(
-        "|{} Configurador de PC's {}|\n",
-        Fg(color::Cyan),
-        Fg(color::Green)
-    );
-    println!("------------------------{} \n\n", Fg(Reset));
+    println!("{}", "------------------------\n".green());
+    println!("{}", "| Configurador de PC's |\n".cyan());
+    println!("{}", "------------------------ \n\n".green());
 }
 
 fn download_links() {
@@ -77,20 +70,16 @@ fn download_links() {
 }
 
 fn show_resume(infos: Vec<String>) {
-    println!("Configuração do git atualizada para: \n");
+    println!("{}", "Configuração do git atualizada para: \n".green());
 
     println!(
-        "{}Nome:{} {} {}\n",
-        Fg(Cyan),
-        Fg(LightCyan),
-        infos.clone().into_iter().nth(0).unwrap().to_string(),
-        Fg(Reset)
+        "{} {}",
+        "Nome:".cyan(),
+        infos.clone().into_iter().nth(0).unwrap().to_string().cyan(),
     );
     println!(
-        "{}Email:{} {} {}\n",
-        Fg(Cyan),
-        Fg(LightCyan),
-        infos.into_iter().nth(1).unwrap().to_string(),
-        Fg(Reset)
+        "{} {}",
+        "Email:".cyan(),
+        infos.into_iter().nth(1).unwrap().to_string().cyan(),
     )
 }

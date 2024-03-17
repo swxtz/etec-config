@@ -1,6 +1,5 @@
+use colored::Colorize;
 use std::io::stdin;
-use termion::color;
-use termion::color::Fg;
 
 pub fn read_input(label: &str) -> Result<String, String> {
     let mut line = String::new();
@@ -9,10 +8,10 @@ pub fn read_input(label: &str) -> Result<String, String> {
         .expect("Erro ao ler input do usuario");
     if line.len() <= 4 {
         return Err(format!(
-            "{}O {} deve ter no minino 3 caracteres{}",
-            Fg(color::Red),
+            "{} {} {}",
+            "{} {}".red(),
+            "Deve ter no minino 3 caracteres no campo".red(),
             label,
-            Fg(color::Reset)
         ));
     }
 
