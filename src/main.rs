@@ -1,3 +1,29 @@
+mod input;
+
+use input::read_input;
+
 fn main() {
-    println!("Hello, world!");
+
+    greeting();
+
+    println!("Digite seu nome para o git");
+
+    match read_input("nome") {
+        Ok(name) => println!("{}", name),
+        Err(e) => panic!("{}", e),
+    };
+
+    println!("Digite seu Email para o git");
+
+    match read_input("email") {
+        Ok(email) => println!("{}", email),
+        Err(e) => panic!("{}", e),
+    };
+}
+
+
+fn greeting() {
+    println!("------------------------\n");
+    println!("| Configurador de PC's |\n");
+    println!("------------------------\n\n");
 }
