@@ -42,6 +42,8 @@ fn main() {
     // set default branch to main
     run_git_command(["config", "--global", "init.defaultBranch", "main"].to_vec()).expect("Erro ao mudar configuração de branch no git config --global");
 
+    //set
+
     println!("{}", "Pressione ENTER para continuar ... ".yellow());
 
     let mut confimation = String::new();
